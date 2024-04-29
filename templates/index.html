@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Machine Learning Model Deployment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+            
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .column {
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .range-info {
+            font-size: 12px;
+            color: #666;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+      window.onload = function() {
+        var stats = {
+            "V1": {"min": -57, "max": 3},
+            "V2": {"min": -73, "max": 23},
+            "V3": {"min": -49, "max": 10},
+            "V4": {"min": -6, "max": 17},
+            "V5": {"min": -114, "max": 35},
+            "V6": {"min": -27, "max": 74},
+            "V7": {"min": -44, "max": 121},
+            "V8": {"min": -73, "max": 21},
+            "V9": {"min": -14, "max": 16},
+            "V10": {"min": -25, "max": 16},
+            "V11": {"min": -5, "max": 10},
+            "V12": {"min": -19, "max": 7},
+            "V13": {"min": -6, "max": 7},
+            "V14": {"min": -19, "max": 11},
+            "V15": {"min": -4, "max": 4},
+            "V16": {"min": -17, "max": 17},
+            "V17": {"min": -29, "max": 10},
+            "V18": {"min": -10, "max": 5},
+            "V19": {"min": -8, "max": 6},
+            "V20": {"min": -55, "max": 40},
+            "V21": {"min": -35, "max": 27},
+            "V22": {"min": -11, "max": 11},
+            "V23": {"min": -45, "max": 23},
+            "V24": {"min": -3, "max": 5},
+            "V25": {"min": -11, "max": 8},
+            "V26": {"min": -3, "max": 4},
+            "V27": {"min": -23, "max": 32},
+            "V28": {"min": -16, "max": 34}
+        };
+
+            var cols = Object.keys(stats);
+
+            cols.forEach(function(col) {
+                var input = document.getElementById(col);
+                if (input) {
+                    input.min = stats[col].min;
+                    input.max = stats[col].max;
+
+                    var label = document.querySelector('label[for="' + col + '"]');
+                    if (label) {
+                        label.innerHTML += ' <span class="range-info">(min: ' + stats[col].min + ', max: ' + stats[col].max + ')</span>';
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center">Fraud Detection Machine Learning Model Deployment</h1>
+
+        <div class="column">
+            <form action="/result" method="post">
+                {% for col in cols[:9] %}
+                <label for="{{ col }}">{{ col }}</label>
+                <input id="{{ col }}" type="number" name="{{ col }}" step="any" inputmode="decimal" placeholder="Enter {{ col }} value" required><br>
+                {% endfor %}
+        </div>
+
+        <div class="column">
+                {% for col in cols[9:18] %}
+                <label for="{{ col }}">{{ col }}</label>
+                <input id="{{ col }}" type="number" name="{{ col }}" step="any" inputmode="decimal" placeholder="Enter {{ col }} value" required><br>
+                {% endfor %}
+        </div>
+
+        <div class="column">
+                {% for col in cols[18:] %}
+                <label for="{{ col }}">{{ col }}</label>
+                <input id="{{ col }}" type="number" name="{{ col }}" step="any" inputmode="decimal" placeholder="Enter {{ col }} value" required><br>
+                {% endfor %}
+            <button type="submit">Predict</button>
+            <input type="reset" value="Reset">
+            </form>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <footer>
+            <p>Comp 247-group 3 © 2024</p>
+        </footer>
+    </div>
+</body>
+
+</html>
